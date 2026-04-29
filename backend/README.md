@@ -1,4 +1,4 @@
-1. Backend Setup (Flask)
+Backend Setup (Flask)
 
 Commands to run:
 
