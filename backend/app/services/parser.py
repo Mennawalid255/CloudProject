@@ -1,17 +1,12 @@
 import re
 
-# -------------------------
-# CLEAN TEXT
-# -------------------------
+
 def clean_text(text: str):
     text = text.replace("\r", "\n")
     text = re.sub(r"[ \t]+", " ", text)
     return text
 
 
-# -------------------------
-# COMPANY NAME EXTRACTION
-# -------------------------
 def extract_first_valid_line(lines):
     blacklist = [
         "invoice", "total", "date", "vat", "tax", "amount",
@@ -37,21 +32,18 @@ def extract_first_valid_line(lines):
         if not any(c.isalpha() for c in line):
             continue
 
-        # uppercase lines are likely merchant names
+ 
         letters = [c for c in line if c.isalpha()]
         upper_ratio = sum(1 for c in letters if c.isupper()) / len(letters)
 
         score += upper_ratio * 10
 
-        # names with dash are common
         if "-" in line:
             score += 3
 
-        # penalize numbers
         if re.search(r"\d", line):
             score -= 5
 
-        # shorter clean lines preferred
         if len(line.split()) <= 4:
             score += 2
 
@@ -65,9 +57,6 @@ def extract_first_valid_line(lines):
     return best_line
 
 
-# -------------------------
-# KEYWORD NUMBER FINDER
-# -------------------------
 def find_by_keywords(text, keywords):
     for line in text.split("\n"):
         if any(k.lower() in line.lower() for k in keywords):
@@ -77,16 +66,10 @@ def find_by_keywords(text, keywords):
     return None
 
 
-# -------------------------
-# TOTAL FALLBACK
-# -------------------------
 def extract_possible_totals(text):
     return [float(x) for x in re.findall(r"\d+\.\d{2}", text)]
 
 
-# -------------------------
-# MAIN PARSER
-# -------------------------
 def parse_invoice(text: str):
 
     data = {}
@@ -94,17 +77,17 @@ def parse_invoice(text: str):
     text = clean_text(text)
     lines = text.split("\n")
 
-    # 🏢 company name
+
     data["company_name"] = extract_first_valid_line(lines)
 
-    # 📅 date
+
     date_match = re.search(
         r"\d{2}[/-]\d{2}[/-]\d{4}|\d{4}[/-]\d{2}[/-]\d{2}",
         text
     )
     data["date"] = date_match.group() if date_match else None
 
-    # 💰 total
+
     total = find_by_keywords(
         text,
         ["total", "grand total", "amount", "amount due", "balance"]
@@ -117,11 +100,11 @@ def parse_invoice(text: str):
 
     data["total price"] = total
 
-    # 🧾 vat / tax
+
     data["vat"] = find_by_keywords(text, ["vat"])
     data["tax"] = find_by_keywords(text, ["tax"])
 
-    # 🧾 invoice number
+
     invoice_match = re.search(
         r"(invoice\s*(no|number|#|id)?)[^\w\d]*([A-Z0-9\-\/]+)",
         text,
@@ -139,9 +122,7 @@ def parse_invoice(text: str):
         else None
     )
 
-    # -------------------------
-    # VALIDATION (FIXED)
-    # -------------------------
+
     errors = []
 
     if data["total price"]:

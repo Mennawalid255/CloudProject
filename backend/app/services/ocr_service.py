@@ -20,7 +20,7 @@ def extract_text(file_path: str) -> str:
 
     ext = os.path.splitext(file_path)[1].lower()
 
-    # 🖼️ IMAGE FILES
+    # Images
     if ext in [".png", ".jpg", ".jpeg"]:
 
         image = Image.open(file_path)
@@ -32,7 +32,7 @@ def extract_text(file_path: str) -> str:
         return text
 
 
-    # 📄 PDF FILES
+    # PDF files
     elif ext == ".pdf":
 
         pages = convert_from_path(file_path, dpi=300)

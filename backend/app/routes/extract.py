@@ -19,7 +19,7 @@ def extract_invoice(filename):
     print("FILE PATH:", file_path)
     print("EXISTS:", os.path.exists(file_path))
 
-    # 📄 OCR step
+
     text = extract_text(file_path)
     print("OCR TEXT:", text)
 
@@ -29,7 +29,7 @@ def extract_invoice(filename):
             "message": "OCR failed or empty text"
         }), 500
 
-    # 🧠 Parsing step
+
     data = parse_invoice(text)
 
     return jsonify({

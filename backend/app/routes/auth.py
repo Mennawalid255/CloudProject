@@ -10,9 +10,7 @@ from app.models import User
 auth_bp = Blueprint("auth", __name__)
 
 
-# -----------------------
-# REGISTER
-# -----------------------
+
 @auth_bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
@@ -28,7 +26,7 @@ def register():
     if not email or not password:
         return jsonify({"message": "Email and password required"}), 400
 
-    # check if user already exists
+
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
         return jsonify({"message": "User already exists"}), 409
@@ -53,9 +51,7 @@ def register():
     return jsonify({"message": "Registered successfully"}), 201
 
 
-# -----------------------
-# LOGIN
-# -----------------------
+
 @auth_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
