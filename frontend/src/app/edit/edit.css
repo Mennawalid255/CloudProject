@@ -1,0 +1,42 @@
+.auth {
+  max-width: 500px;
+  margin: 80px auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.auth h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+.auth input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+.auth input:focus {
+  border-bottom: 1px solid black;
+}
+
+.auth button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.auth button:hover {
+  background: #333;
+}

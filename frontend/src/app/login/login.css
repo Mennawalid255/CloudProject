@@ -1,0 +1,25 @@
+.auth {
+  width: 400px;
+  margin: 100px auto;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+}
+
+p {
+  margin-top: 20px;
+  color: #555;
+  cursor: pointer;
+}

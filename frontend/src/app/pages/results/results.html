@@ -1,0 +1,15 @@
+
+<h2>Invoice Results</h2>
+
+<div *ngIf="data.extractedData">
+  <p><strong>Company:</strong> {{ data.extractedData.company_name }}</p>
+  <p><strong>Date:</strong> {{ data.extractedData.date }}</p>
+  <p><strong>Total:</strong> {{ data.extractedData['total price'] }}</p>
+  <p><strong>VAT:</strong> {{ data.extractedData.vat }}</p>
+  <p><strong>Invoice #:</strong> {{ data.extractedData.invoice_number }}</p>
+</div>
+
+<div *ngIf="!data.extractedData">
+  <p>No data yet. Upload an invoice first.</p>
+</div>
+

@@ -1,0 +1,10 @@
+<pre>{{ data | json }}</pre>
+
+<div *ngIf="data && data.extractedData">
+  <h3>Invoice Result</h3>
+  <p><strong>Company:</strong> {{ data.extractedData.company_name }}</p>
+  <p><strong>Date:</strong> {{ data.extractedData.date }}</p>
+  <p><strong>Total:</strong> {{ data.extractedData['total price'] }}</p>
+</div>
+
+

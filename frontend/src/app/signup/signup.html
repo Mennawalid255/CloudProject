@@ -1,0 +1,18 @@
+<div class="auth">
+  <h2>SIGN UP</h2>
+<form [formGroup]="form" (ngSubmit)="signup()">
+
+  <input formControlName="firstName" placeholder="First Name">
+  <input formControlName="lastName" placeholder="Last Name">
+  <input formControlName="email" placeholder="Email">
+  <input type="password" formControlName="password" placeholder="Password">
+  <input type="password" formControlName="confirmPassword" placeholder="Confirm Password">
+
+  <button type="submit">CREATE ACCOUNT</button>
+
+</form>
+
+  <p routerLink="/login" style="cursor:pointer;">
+ Already have an account? Login
+</p>
+</div>
