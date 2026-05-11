@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class ApiService {
 
-  baseUrl = 'http://127.0.0.1:5000';
+  baseUrl = 'http://cloudproject-alb-1408859741.us-east-1.elb.amazonaws.com';
 
   constructor(private http: HttpClient) {}
 

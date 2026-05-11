@@ -1,36 +1,26 @@
-
-    <div class="home">
+<div class="home">
   <div class="left">
     <h2>Upload Invoice / Receipt</h2>
-
     <div class="upload-box">
       <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf">
-
       <p>Upload invoice or receipt images/PDFs</p>
       <small>Supported: JPG, PNG, PDF</small>
     </div>
-
     <button (click)="upload()">UPLOAD</button>
   </div>
 
-<div class="right">
-  <h2>Model Output</h2>
-
-  <div class="output-box">
-
-    <p *ngIf="!result">Result will appear here...</p>
-
-    <div *ngIf="result">
-
-      <p><strong>Company:</strong> {{ result.company_name }}</p>
-
-      <p><strong>Date:</strong> {{ result.date }}</p>
-
-      <p><strong>Total Price:</strong> {{ result["total price"] }}</p>
-
-      <p><strong>VAT:</strong> {{ result.vat || '-' }}</p>
-
-      <p><strong>Invoice #:</strong> {{ result.invoice_number || '-' }}</p>
-
+  <div class="right">
+    <h2>Model Output</h2>
+    <div class="output-box">
+      <p *ngIf="!result">Result will appear here...</p>
+      <div *ngIf="result">
+        <p><strong>Company Name:</strong> {{ result.company_name || '-' }}</p>
+	<p><strong>Address:</strong> {{ result.address || '-' }}</p>
+        <p><strong>Date:</strong> {{ result.date || '-' }}</p>
+        <p><strong>Total Price:</strong> {{ result["total price"] || '-' }}</p>
+        <p><strong>VAT:</strong> {{ result.vat || '-' }}</p>
+        <p><strong>Invoice #:</strong> {{ result.invoice_number || '-' }}</p>
+      </div>
+    </div>
   </div>
 </div>

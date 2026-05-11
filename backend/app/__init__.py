@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask 
 from flask_cors import CORS
 
 from app.config import Config
@@ -11,13 +11,12 @@ def create_app():
 
     print("DB PATH:", app.config["SQLALCHEMY_DATABASE_URI"])
 
-    CORS(
-    app,
-    resources={r"/*": {"origins": "http://localhost:4200"}},
-    supports_credentials=True,
-    allow_headers=["Content-Type", "Authorization"],
-    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-)
+    CORS(app, 
+     resources={r"/*": {"origins": "*"}},
+     supports_credentials=False,
+     allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
+     expose_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
     db.init_app(app)
     jwt.init_app(app)

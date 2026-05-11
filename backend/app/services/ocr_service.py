@@ -3,8 +3,10 @@ from pdf2image import convert_from_path
 from PIL import Image, ImageOps, ImageFilter
 import os
 
-# Windows path
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+import platform
+if platform.system() == "Windows":
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 
 def preprocess_image(image: Image.Image) -> Image.Image:
@@ -23,7 +25,7 @@ def extract_text(file_path: str) -> str:
     # Images
     if ext in [".png", ".jpg", ".jpeg"]:
 
-        image = Image.open(file_path)
+        image = Image.open(file_path).convert("RGB")
         image = preprocess_image(image)
 
         config = r'--psm 6'
