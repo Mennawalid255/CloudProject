@@ -20,20 +20,16 @@ def create_app():
 
     db.init_app(app)
     jwt.init_app(app)
-
-
     from app.routes.auth import auth_bp
     from app.routes.upload import upload_bp
     from app.routes.extract import extract_bp
     from app.routes.health import health_bp
-
+    from app.routes.evaluate import evaluate_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(upload_bp, url_prefix="/upload")
     app.register_blueprint(extract_bp)
     app.register_blueprint(health_bp)
-
-    
+    app.register_blueprint(evaluate_bp)
     with app.app_context():
         db.create_all()
-
     return app

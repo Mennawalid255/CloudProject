@@ -5,6 +5,7 @@ import { ProfileComponent } from './profile/profile';
 import { EditComponent } from './edit/edit';
 import { HomeComponent } from './home/home';
 import { Results } from './pages/results/results';
+import { EvaluateComponent } from './evaluate/evaluate';
 
 export const routes: Routes = [
  { path: '', component: LoginComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent }, 
   { path: 'edit', component: EditComponent },
   {path: 'home', component: HomeComponent},
-  {path: 'results', component: Results}
+  {path: 'results', component: Results},
+{ path: 'evaluate', component: EvaluateComponent }
 ];

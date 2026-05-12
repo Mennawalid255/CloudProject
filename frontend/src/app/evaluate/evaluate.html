@@ -1,0 +1,72 @@
+<div class="evaluate-page">
+  <h2>Model Evaluation</h2>
+  <p class="subtitle">Upload a test invoice to evaluate model accuracy</p>
+
+  <div class="upload-section">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf">
+    <button (click)="upload()" [disabled]="loading">
+      {{ loading ? 'Evaluating...' : 'EVALUATE' }}
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Running model evaluation...
+  </div>
+
+  <div *ngIf="result" class="results">
+
+    <!-- Metrics Summary -->
+    <div class="metrics-box" *ngIf="result.metrics">
+      <h3>Overall Metrics</h3>
+      <div class="metric">
+        <span>Label Accuracy:</span>
+        <strong [style.color]="getF1Color(result.metrics.label_accuracy)">
+          {{ (result.metrics.label_accuracy * 100).toFixed(1) }}%
+        </strong>
+      </div>
+      <div class="metric">
+        <span>Entity F1 Score:</span>
+        <strong [style.color]="getF1Color(result.metrics.entity_f1)">
+          {{ (result.metrics.entity_f1 * 100).toFixed(1) }}%
+        </strong>
+      </div>
+    </div>
+
+    <!-- Field Results Table -->
+    <div class="table-section" *ngIf="result.field_results">
+      <h3>Field-Level Results</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Predicted</th>
+            <th>Ground Truth</th>
+            <th>F1 Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let field of ['COMPANY', 'DATE', 'ADDRESS', 'TOTAL']">
+            <td><strong>{{ field }}</strong></td>
+            <td>{{ result.field_results[field]?.predicted || '-' }}</td>
+            <td>{{ result.field_results[field]?.ground_truth || '-' }}</td>
+            <td [style.color]="getF1Color(result.field_results[field]?.f1_score)">
+              {{ (result.field_results[field]?.f1_score * 100).toFixed(1) }}%
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Prediction only mode -->
+    <div *ngIf="result.mode === 'prediction_only'" class="prediction-box">
+      <h3>Extracted Fields</h3>
+      <p><strong>Company:</strong> {{ result.predicted?.COMPANY || '-' }}</p>
+      <p><strong>Date:</strong> {{ result.predicted?.DATE || '-' }}</p>
+      <p><strong>Address:</strong> {{ result.predicted?.ADDRESS || '-' }}</p>
+      <p><strong>Total:</strong> {{ result.predicted?.TOTAL || '-' }}</p>
+      <p class="note">{{ result.message }}</p>
+    </div>
+
+  </div>
+</div>
+

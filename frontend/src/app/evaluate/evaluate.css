@@ -1,0 +1,71 @@
+.evaluate-page {
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.upload-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 10px 25px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #666;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.metrics-box {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 1.1em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #333;
+  color: white;
+}
+
+.note {
+  color: #666;
+  font-style: italic;
+}

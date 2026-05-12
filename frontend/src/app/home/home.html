@@ -4,7 +4,7 @@
     <div class="upload-box">
       <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf">
       <p>Upload invoice or receipt images/PDFs</p>
-      <small>Supported: JPG, PNG, PDF</small>
+      <small>Supported: JPEG, PNG, PDF</small>
     </div>
     <button (click)="upload()">UPLOAD</button>
   </div>
@@ -18,8 +18,6 @@
 	<p><strong>Address:</strong> {{ result.address || '-' }}</p>
         <p><strong>Date:</strong> {{ result.date || '-' }}</p>
         <p><strong>Total Price:</strong> {{ result["total price"] || '-' }}</p>
-        <p><strong>VAT:</strong> {{ result.vat || '-' }}</p>
-        <p><strong>Invoice #:</strong> {{ result.invoice_number || '-' }}</p>
       </div>
     </div>
   </div>

@@ -43,4 +43,16 @@ export class ApiService {
       }
     );
   }
+  evaluate(filename: string, token: string) {
+    return this.http.get(
+      `${this.baseUrl}/evaluate/${filename}`,
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`
+        })
+      }
+    );
+  }
 }
+
+  
