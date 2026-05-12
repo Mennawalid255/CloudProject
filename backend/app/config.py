@@ -9,6 +9,15 @@ if not os.path.exists(INSTANCE_DIR):
 
 DB_PATH = os.path.join(INSTANCE_DIR, "users.db")
 
+def get_database_uri():
+    db_host = os.environ.get("DB_HOST")
+    db_name = os.environ.get("DB_NAME", "invoices_db")
+    db_user = os.environ.get("DB_USER", "admin")
+    db_password = os.environ.get("DB_PASSWORD", "")
+    if db_host:
+        return f"mysql+pymysql://{db_user}:{db_password}@{db_host}/{db_name}"
+    return f"sqlite:///{DB_PATH}"
+
 class Config:
     DEBUG = True
     SECRET_KEY = os.environ.get("SECRET_KEY", "super-secret-key")
@@ -16,15 +25,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = os.environ.get("UPLOAD_FOLDER", os.path.join(BASE_DIR, "uploads"))
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=15)
-
-    # Use MySQL if DB_HOST is set, otherwise fall back to SQLite
-    DB_HOST = os.environ.get("DB_HOST")
-    DB_NAME = os.environ.get("DB_NAME", "invoices_db")
-    DB_USER = os.environ.get("DB_USER", "admin")
-    DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
-
-    if DB_HOST:
-        SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
-    else:
-        SQLALCHEMY_DATABASE_URI = f"sqlite:///{DB_PATH}"
-        
+    SQLALCHEMY_DATABASE_URI = get_database_uri()
